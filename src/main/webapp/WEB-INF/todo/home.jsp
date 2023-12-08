@@ -81,12 +81,12 @@
     }
 
     ul {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       width: 100%;
     }
     li {
       width: 100%;
-      margin: 2.5rem 0;
+      margin: 1rem 0;
       list-style: none;
       background-color: #bacec1;
       border-radius: 4px;
