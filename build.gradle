@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.9.1'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    // Servlet
+    compileOnly('javax.servlet:javax.servlet-api:4.0.1')
+
+    // mariadb
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.3.0'
+
+    // HikariCP
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.0.1'
+
+    // ModelMapper
+    implementation 'org.modelmapper:modelmapper:3.2.0'
+
+    // Log4j2
+    implementation 'org.apache.logging.log4j:log4j-core:2.22.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.22.0'
+    testImplementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.22.0'
+
+    // JSTL
+    implementation group: 'jstl', name: 'jstl', version: '1.2'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}
