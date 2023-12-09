@@ -14,22 +14,24 @@ public enum TodoRepository {
         INSTANCE;
 
         public void insert(Todo todo) throws SQLException {
-                String sql = "insert into tbl_todo (content, done, due_date) values(?,?,?);";
+                String sql = "insert into tbl_todo (content, done, due_date, member_id) values(?,?,?,?);";
 
                 @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
                 @Cleanup PreparedStatement psmt = connection.prepareStatement(sql);
                 psmt.setString(1, todo.getContent());
                 psmt.setBoolean(2, todo.isDone());
                 psmt.setDate(3, Date.valueOf(todo.getDueDate()));
+                psmt.setLong(4, todo.getMemberId());
 
                 psmt.executeUpdate();
         }
 
-        public List<Todo> getList() throws SQLException {
-                String sql = "select * from tbl_todo;";
+        public List<Todo> getList(Long memberId) throws SQLException {
+                String sql = "select * from tbl_todo where member_id = ?;";
 
                 @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
                 @Cleanup PreparedStatement psmt = connection.prepareStatement(sql);
+                psmt.setLong(1, memberId);
                 ResultSet resultSet = psmt.executeQuery();
 
                 List<Todo> todos = new ArrayList<>();

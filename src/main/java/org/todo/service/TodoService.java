@@ -15,9 +15,9 @@ public enum TodoService {
 
         private final TodoRepository repository = TodoRepository.INSTANCE;
 
-        public List<TodoDTO> getList() {
+        public List<TodoDTO> getList(Long memberId) {
                 try {
-                        return repository.getList().stream().map(TodoDTO::fromModel).collect(Collectors.toList());
+                        return repository.getList(memberId).stream().map(TodoDTO::fromModel).collect(Collectors.toList());
                 } catch (SQLException e) {
                         log.error(e.getMessage());
                         throw new RuntimeException(e);
@@ -31,6 +31,7 @@ public enum TodoService {
                                         .content(dto.getContent())
                                         .dueDate(LocalDate.now())
                                         .done(false)
+                                        .memberId(dto.getMemberId())
                                         .build()
                         );
                 } catch (SQLException e) {
