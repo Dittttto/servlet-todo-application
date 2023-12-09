@@ -18,8 +18,8 @@ public class TodoApiController extends HttpServlet {
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
                 String content = req.getParameter("content");
-
-                service.insert(TodoDTO.builder().content(content).build());
+                Long memberId = Long.parseLong(req.getParameter("memberId"));
+                service.insert(TodoDTO.builder().content(content).memberId(memberId).build());
                 resp.sendRedirect("/");
         }
 

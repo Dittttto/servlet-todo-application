@@ -1,6 +1,5 @@
 package org.todo.model;
 
-import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,10 +11,9 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Todo {
+public class Member {
         private Long id;
-        private String content;
-        private boolean done;
-        private LocalDate dueDate;
-        private Long memberId;
+        private String name;
+        private String email;
+        private String password;
 }

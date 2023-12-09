@@ -16,6 +16,7 @@ public class TodoDTO {
         private String content;
         private boolean done;
         private LocalDate dueDate;
+        private Long memberId;
 
         public static TodoDTO fromModel(Todo todo) {
                 return TodoDTO.builder()
@@ -23,6 +24,7 @@ public class TodoDTO {
                         .content(todo.getContent())
                         .dueDate(todo.getDueDate())
                         .done(todo.isDone())
+                        .memberId(todo.getMemberId())
                         .build();
         }
 }
