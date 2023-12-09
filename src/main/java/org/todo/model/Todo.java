@@ -17,4 +17,5 @@ public class Todo {
         private String content;
         private boolean done;
         private LocalDate dueDate;
+        private Long memberId;
 }
