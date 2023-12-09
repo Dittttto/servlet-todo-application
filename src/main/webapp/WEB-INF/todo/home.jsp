@@ -117,13 +117,28 @@
     li .dueDate {
       font-size: 0.8rem;
     }
+
+    .logout_btn {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      border-radius: 4px;
+      background-color: #1d3124;
+      width: 100px;
+      padding: 0.5rem;
+      font-size: 0.7rem;
+      color: white;
+      cursor: pointer;
+      border: 1px solid lightslategray;
+    }
   </style>
 </head>
 <body class="container">
 <header>Remember Me!</header>
 <section>
   <div class="input-form-wrapper">
-    <form action="/api/todo" method="post">
+    <form action="${pageContext.request.contextPath}/api/todo" method="post">
+      <input type="hidden" name="memberId" value="${loginInfo.id}">
       <input type="text" name="content" placeholder="기억해야할 일을 작성해주세요." />
       <button type="submit">+</button>
     </form>
@@ -148,16 +163,17 @@
     </ul>
   </div>
 </section>
+<button class="logout_btn" onclick="logout()">LOGOUT</button>
 <script>
   const checkbox = document.querySelector(".doneCheckbox");
   const deleteTodo = (id) => {
     const answer = confirm("정말 삭제하시겠습니까?");
     if (!answer) return;
-    fetch("/api/todo", {
+    fetch("${pageContext.request.contextPath}/api/todo", {
       method: "DELETE",
       body: id
     }).then(() => {
-      window.location.href="/";
+      window.location.href="/todo";
     });
   }
 
@@ -167,12 +183,20 @@
       content,
       done: done === "false"
     }
-    fetch("/api/todo", {
+    fetch("${pageContext.request.contextPath}/api/todo", {
       method: "PUT",
       body: JSON.stringify(data)
     }).then(() => {
-      window.location.href="/";
+      window.location.href="/todo";
     });
+  }
+
+  const logout = () => {
+    fetch("${pageContext.request.contextPath}/api/logout", {
+      method: "POST",
+    }).then(() => {
+      window.location.href="/login";
+    })
   }
 </script>
 </body>
