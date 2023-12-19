@@ -106,7 +106,7 @@
         <button>로그인</button>
     </form>
     <div class="bottom-btn">
-        <button class="signupBtn" onclick="moveToSignup()" type="button">회원가입하기</button>
+        <button class="signupBtn" onclick="moveToSignup()" type="button">회원가입</button>
     </div>
 </section>
 <script>
